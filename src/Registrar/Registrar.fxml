@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: none;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Registrar.RegistrarController">
+    <children>
+        <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <Label style="-fx-text-fill: #2ECC40;" text="Usuarios" BorderPane.alignment="CENTER">
+                    <font>
+                        <Font name="Arial" size="24.0" />
+                    </font>
+                </Label>
+            </top>
+            <center>
+                <GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="221.0" prefWidth="524.0" vgap="20.0" BorderPane.alignment="CENTER">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="15.0" prefWidth="200.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="15.0" prefWidth="200.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="15.0" prefWidth="200.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" minHeight="20.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="20.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                        <RowConstraints maxHeight="-Infinity" minHeight="20.0" prefHeight="80.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <JFXTextField fx:id="txtNombre" labelFloat="true" promptText="Nombre">
+                            <GridPane.margin>
+                                <Insets bottom="10.0" top="10.0" />
+                            </GridPane.margin></JFXTextField>
+                        <JFXTextField fx:id="txtApelldioP" labelFloat="true" promptText="Apellido Paterno" GridPane.columnIndex="1">
+                            <GridPane.margin>
+                                <Insets bottom="10.0" top="10.0" />
+                            </GridPane.margin></JFXTextField>
+                        <JFXTextField fx:id="txtApellidoM" labelFloat="true" promptText="Apellido Materno" GridPane.columnIndex="2">
+                            <GridPane.margin>
+                                <Insets bottom="10.0" top="10.0" />
+                            </GridPane.margin></JFXTextField>
+                        <JFXTextField fx:id="txtNombreU" labelFloat="true" promptText="Nombre de usuario" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets bottom="10.0" top="10.0" />
+                            </GridPane.margin></JFXTextField>
+                        <JFXPasswordField fx:id="pwdContrasena" labelFloat="true" promptText="Contraseña" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets bottom="10.0" top="10.0" />
+                            </GridPane.margin></JFXPasswordField>
+                        <JFXPasswordField fx:id="pwdContrasena2" labelFloat="true" prefWidth="100.0" promptText="Repetir contraseña" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                            <GridPane.margin>
+                                <Insets bottom="10.0" top="10.0" />
+                            </GridPane.margin></JFXPasswordField>
+                        <JFXComboBox fx:id="cboRol" promptText="Rol" GridPane.rowIndex="2" />
+                        <JFXButton id="BtnRegistrar" fx:id="reg" onAction="#Registrar" ripplerFill="#3719b2" style="-fx-background-color: #0074D9;" text="Registrar" textFill="WHITE" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+                  <JFXButton id="BtnRegistrar" fx:id="btnLimpiar" alignment="CENTER" layoutX="418.0" layoutY="132.0" onAction="#CleanFields" ripplerFill="#3719b2" style="-fx-background-color: #0074D9;" text="Limpiar" textFill="WHITE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets left="100.0" />
+                     </GridPane.margin>
+                  </JFXButton>
+                  <JFXButton id="BtnRegistrar" fx:id="btnNuevo" alignment="CENTER" layoutX="244.0" layoutY="132.0" onAction="#activaCampos" ripplerFill="#3719b2" style="-fx-background-color: #0074D9;" text="Nuevo" textFill="WHITE" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <GridPane.margin>
+                        <Insets right="2.0" />
+                     </GridPane.margin>
+                  </JFXButton>
+                    </children>
+                    <BorderPane.margin>
+                        <Insets bottom="20.0" />
+                    </BorderPane.margin>
+                </GridPane>
+            </center>
+         <bottom>
+            <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columns>
+               
+              </columns>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem fx:id="mneEditarUsuario" mnemonicParsing="false" onAction="#editarUsuario" text="Editar" />
+                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
+            </TableView>
+         </bottom>
+        </BorderPane>
+    </children>
+    <padding>
+        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+    </padding>
+</Pane>

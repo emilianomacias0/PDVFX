@@ -1,0 +1,20 @@
+#pnlSide {
+    -fx-background-color: #0074D9;
+
+}
+Button{
+    -fx-background-color: none;
+
+}
+Button:hover{
+    -fx-background-color: #0074D9;
+    -fx-border-width: 1pt;
+    -fx-scale-x: 120%;
+    -fx-scale-y: 120%;
+}
+Button:pressed{
+    -fx-background-color: #0074D9;
+    -fx-border-width: 1pt;
+    -fx-scale-x: 80%;
+    -fx-scale-y: 80%;
+}

@@ -1,0 +1,14 @@
+#btnLogin{
+-fx-background-color: #0074D9;
+    -fx-font-weight: bold;
+}
+#btnLogin:hover{
+    -fx-min-width: 70;
+    -fx-min-height: 40;
+    -fx-font-scale: 150%;
+}
+
+#btnLogin:pressed{
+    -fx-min-width: 60;
+    -fx-min-height: 30;
+}
