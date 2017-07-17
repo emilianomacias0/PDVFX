@@ -5,9 +5,14 @@ import Conexion.Roles;
 import Conexion.RolesUsuario;
 import Conexion.Usuarios;
 import Modals.AlertBox;
+import Modals.ConfirmBox;
 import Modals.Warning;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableView;
+import com.jfoenix.validation.RequiredFieldValidator;
+import de.jensd.fx.fontawesome.AwesomeDude;
+import de.jensd.fx.fontawesome.AwesomeIcon;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,10 +21,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javax.swing.*;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -28,6 +36,9 @@ import java.util.ResourceBundle;
  * Created by fknrk on 7/9/2017.
  */
 public class RegistrarController extends Conexion implements Initializable {
+    Date dt = new Date();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    String fechaActual = sdf.format(dt);
     Usuarios users = new Usuarios();
     RolesUsuario ru = new RolesUsuario();
     Roles roles = new Roles();
@@ -44,45 +55,62 @@ public class RegistrarController extends Conexion implements Initializable {
     private JFXButton reg;
     @FXML
     private JFXButton btnLimpiar;
-
     @FXML
     private JFXButton btnNuevo;
-    private Boolean editar;
+    @FXML
+    private MenuItem mneEditarUsuario;
+    @FXML
+    private MenuItem mnEliminaUsuario;
+
+    private Boolean editar = false;
+    private int idUsuarioEditar;
 
 
 
     public void Registrar() throws SQLException {
-        if(allFields()) {
-        String nombre = txtNombre.getText();
-        String aMaterno = txtApellidoM.getText();
-        String aPaterno = txtApelldioP.getText();
-        String nUsuario = txtNombreU.getText();
-        String pass1 = pwdContrasena.getText();
-        String pass2 = pwdContrasena2.getText();
-        String rol = cboRol.getSelectionModel().getSelectedItem().toString();
-
-            if (editar){
-
-            }else {
-                int userId = users.InsertaUsuario(nombre, aPaterno, aMaterno, nUsuario, pass1);
-                if (userId != 0) {
-
-                    System.out.println("User ID");
-                    System.out.println(userId);
-                    System.out.println("IdRol:");
-                    System.out.println(roles.getRolId(rol));
-                    ru.insertaRolesUsuario(userId, roles.getRolId(rol));
-                    AlertBox.display("Exito!", "El usuario " + nUsuario + " fue registrado correctamente!");
-                    System.out.println("Role: " + rol);
-                    User usuario = new User(userId, nombre, aPaterno, aMaterno, nUsuario, pass1);
+        if (allFields()) {
+            String nombre = txtNombre.getText();
+            String aMaterno = txtApellidoM.getText();
+            String aPaterno = txtApelldioP.getText();
+            String nUsuario = txtNombreU.getText();
+            String pass1 = pwdContrasena.getText();
+            String pass2 = pwdContrasena2.getText();
+            String rol = cboRol.getSelectionModel().getSelectedItem().toString();
+            if (pass1.equals(pass2)) {
+                if (editar) {
+                    users.editaUsuario(idUsuarioEditar, nombre, aPaterno, aMaterno, nUsuario, pass1);
+                    ru.actualizaRolesUsuario(idUsuarioEditar, roles.getRolId(rol));
                     CleanFields();
-                    table.getItems().add(usuario);
+                    desactivaCampos();
+                    AlertBox.display("Exito!", "Usuario actualizado correctamente");
+                    editar = false;
+                } else {
+                    int userId = users.InsertaUsuario(nombre, aPaterno, aMaterno, nUsuario, pass1,fechaActual);
+                    if (userId != 0) {
+
+                        System.out.println("User ID");
+                        System.out.println(userId);
+                        System.out.println("IdRol:");
+                        System.out.println(roles.getRolId(rol));
+                        ru.insertaRolesUsuario(userId, roles.getRolId(rol));
+                        AlertBox.display("Exito!", "El usuario " + nUsuario + " fue registrado correctamente!");
+                        System.out.println("Role: " + rol);
+                        User usuario = new User(userId, nombre, aPaterno, aMaterno, nUsuario, "**********",fechaActual);
+                        CleanFields();
+                        table.getItems().add(usuario);
+                        desactivaCampos();
+
+                    }
                 }
+            } else {
+                AlertBox.display("Error!", "Las contraseñas no coinsiden");
             }
-        }else{
+
+        }else {
             AlertBox.display("Error!", "Debes llenar todos los campos");
 
         }
+
     }
 
     public void CleanFields(){
@@ -93,8 +121,8 @@ public class RegistrarController extends Conexion implements Initializable {
         pwdContrasena.clear();
         pwdContrasena2.clear();
         cboRol.getSelectionModel().clearSelection();
-       // reg.setDisable(true);
-
+        reg.setText("Registrar");
+        idUsuarioEditar = 0;
     }
 
     private Boolean allFields(){
@@ -105,7 +133,7 @@ public class RegistrarController extends Conexion implements Initializable {
         !txtNombreU.getText().equals("") &&
         !pwdContrasena.getText().equals("") &&
         !pwdContrasena2.getText().equals("") &&
-        !cboRol.getSelectionModel().getSelectedItem().toString().equals(null)){
+        !cboRol.getSelectionModel().isEmpty()){
             t = true;
         }
         return t;
@@ -118,6 +146,16 @@ public class RegistrarController extends Conexion implements Initializable {
         Roles roles = new Roles();
         desactivaCampos();
         CleanFields();
+
+//        JFXTextField validationField = new JFXTextField();
+//        validationField.setPromptText("With Validation..");
+//        RequiredFieldValidator validator = new RequiredFieldValidator();
+//        validator.setMessage("Input Required");
+//        validator.setIcon(new Icon(AwesomeIcon.DASHBOARD, "Domain", "3em"));
+//        validationField.getValidators().add(validator);
+//        validationField.focusedProperty().addListener((o,oldVal,newVal)->{
+//            if(!newVal) validationField.validate();
+//        });
         cboRol.getItems().removeAll(cboRol.getItems());
         try {
             cboRol.getItems().addAll(roles.getRoles());
@@ -144,47 +182,21 @@ public class RegistrarController extends Conexion implements Initializable {
         userColumn.setMaxWidth(100);
         userColumn.setCellValueFactory(new PropertyValueFactory<>("usuario"));
         //new column
-        TableColumn<User,String> passColumn = new TableColumn<>("Contrasena");
+        TableColumn<User,String> passColumn = new TableColumn<>("Contraseña");
         passColumn.setMaxWidth(100);
         passColumn.setCellValueFactory(new PropertyValueFactory<>("contrasena"));
+        TableColumn<User,String> dateColumn = new TableColumn<>("Creado el");
+        dateColumn.setMaxWidth(100);
+        dateColumn.setCellValueFactory(new PropertyValueFactory<>("creadoEl"));
         try {
             table.setItems(getUser());
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        table.getColumns().addAll(idColumn,nameColumn,apColumn,amColumn,userColumn,passColumn);
+        table.getColumns().addAll(idColumn,nameColumn,apColumn,amColumn,userColumn,passColumn,dateColumn);
     }
 
-    /*
-    private void removeRow() {
-        ObservableList<Product> productSelected ,allProducts;
-        allProducts = table.getItems();
-        productSelected = table.getSelectionModel().getSelectedItems();
 
-        productSelected.forEach(allProducts::remove);
-    }
-
-   private void addRow() {
-        Product product = new Product();
-        product.setName(nameInput.getText());
-        product.setPrice(Double.parseDouble(priceInput.getText()));
-        product.setQuantity(Integer.parseInt(quantityInput.getText()));
-        table.getItems().add(product);
-        nameInput.clear();
-        priceInput.clear();
-        quantityInput.clear();
-    }
-
-    public ObservableList<Product> getProduct(){
-        ObservableList<Product> products = FXCollections.observableArrayList();
-        products.add(new Product("Lap Top",8.59,20));
-        products.add(new Product("Bed",59.32,15));
-        products.add(new Product("BaseBall",15.99,80));
-        products.add(new Product("PS4",300,2));
-        products.add(new Product("Xbox One",300,2));
-        return products;
-    }
-*/
     public ObservableList<User> getUser() throws SQLException {
         ObservableList<User> users = FXCollections.observableArrayList();
         Statement st = con.createStatement();
@@ -197,7 +209,8 @@ public class RegistrarController extends Conexion implements Initializable {
                     rs.getString("apellidoP"),
                     rs.getString("apellidoM"),
                     rs.getString("usuario"),
-                    rs.getString("contrasena")));
+                    "**********",
+                    rs.getString("creadoEl")));
         }
        // users.add(new User(2,"Emiliano","Macias","Lucas","emi","macias"));
 
@@ -207,6 +220,7 @@ public class RegistrarController extends Conexion implements Initializable {
         editar = true;
         User datos = table.getSelectionModel().getSelectedItem();
       //  System.out.println(datos.getName());
+        idUsuarioEditar = datos.getIdUsuario();
         Map<String,String> userData = users.getUser(datos.getIdUsuario()+"");
         txtNombre.setText(userData.get("Nombre"));
         txtApelldioP.setText(userData.get("ApellidoP"));
@@ -243,5 +257,22 @@ public class RegistrarController extends Conexion implements Initializable {
         reg.setDisable(false);
         btnLimpiar.setDisable(false);
 
+    }
+
+
+    public void eliminaUsuario(ActionEvent actionEvent) throws SQLException {
+        User datos = table.getSelectionModel().getSelectedItem();
+        ObservableList<User> productSelected ,allProducts;
+        allProducts = table.getItems();
+        productSelected = table.getSelectionModel().getSelectedItems();
+
+
+        if (ConfirmBox.display("Cuidad","Deseas eliminar al usuario \""+datos.getNombre()+"\"")){
+            if (users.eliminaUsuario(datos.getIdUsuario()+"")){
+                ru.eliminaRolesUsuario(datos.getIdUsuario());
+                productSelected.forEach(allProducts::remove);
+                AlertBox.display("Exito","El usuario \""+datos.getNombre()+"\" fue eliminado exitosamente");
+            }
+        }
     }
 }

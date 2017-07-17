@@ -17,20 +17,23 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: none;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Registrar.RegistrarController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="529.0" prefWidth="710.0" style="-fx-background-color: none;" stylesheets="@../Estilos/estilologin.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Registrar.RegistrarController">
     <children>
-        <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <BorderPane prefHeight="521.0" prefWidth="710.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <top>
-                <Label style="-fx-text-fill: #2ECC40;" text="Usuarios" BorderPane.alignment="CENTER">
+                <Label fx:id="hdRegistro" prefHeight="27.0" text="Usuarios" BorderPane.alignment="TOP_LEFT">
                     <font>
                         <Font name="Arial" size="24.0" />
                     </font>
+               <BorderPane.margin>
+                  <Insets bottom="20.0" />
+               </BorderPane.margin>
                 </Label>
             </top>
             <center>
                 <GridPane hgap="10.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="221.0" prefWidth="524.0" vgap="20.0" BorderPane.alignment="CENTER">
                     <columnConstraints>
-                        <ColumnConstraints hgrow="SOMETIMES" minWidth="15.0" prefWidth="200.0" />
+                        <ColumnConstraints hgrow="ALWAYS" minWidth="15.0" prefWidth="200.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="15.0" prefWidth="200.0" />
                         <ColumnConstraints hgrow="SOMETIMES" minWidth="15.0" prefWidth="200.0" />
                     </columnConstraints>
@@ -83,7 +86,7 @@
                 </GridPane>
             </center>
          <bottom>
-            <TableView fx:id="table" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="table" prefHeight="324.0" prefWidth="591.0" BorderPane.alignment="CENTER">
               <columns>
                
               </columns>
@@ -91,7 +94,7 @@
                   <ContextMenu>
                     <items>
                       <MenuItem fx:id="mneEditarUsuario" mnemonicParsing="false" onAction="#editarUsuario" text="Editar" />
-                        <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                        <MenuItem fx:id="mnEliminaUsuario" mnemonicParsing="false" onAction="#eliminaUsuario" text="Eliminar" />
                     </items>
                   </ContextMenu>
                </contextMenu>

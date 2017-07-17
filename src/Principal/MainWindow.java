@@ -23,7 +23,7 @@ public class MainWindow extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("Principal.fxml"));
-        primaryStage.setTitle("Hello World");
+        primaryStage.setTitle("PDV");
         primaryStage.setScene(new Scene(root, 900, 600));
         primaryStage.show();
 

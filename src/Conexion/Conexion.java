@@ -24,9 +24,9 @@ public class Conexion {
         }
     }
 
-    public static void main(String[] args) throws SQLException {
+    /*public static void main(String[] args) throws SQLException {
         Usuarios con = new Usuarios();
         con.InsertaUsuario("Emiliano","Macias","Lucas","emi","macias");
         System.out.println();
-    }
+    }*/
 }

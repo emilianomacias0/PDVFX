@@ -8,13 +8,19 @@ Button{
 }
 Button:hover{
     -fx-background-color: #0074D9;
-    -fx-border-width: 1pt;
+    -fx-border-width: 0pt 3pt 0pt 0pt;
+    -fx-border-color: red red green yellow;
     -fx-scale-x: 120%;
     -fx-scale-y: 120%;
 }
 Button:pressed{
     -fx-background-color: #0074D9;
     -fx-border-width: 1pt;
+    -fx-border-color: none;
     -fx-scale-x: 80%;
     -fx-scale-y: 80%;
+}
+
+#stgVentana{
+    -fx-background-color: white;
 }

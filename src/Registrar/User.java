@@ -8,8 +8,11 @@ public class User {
     private String nombre;
     private String apellidoP;
     private String apellidoM;
+    private String usuario;
+    private String contrasena;
+    private String creadoEl;
 
-    public User(int idUsuario, String nombre, String apellidoP, String apellidoM, String usuario, String contrasena) {
+    public User(int idUsuario, String nombre, String apellidoP, String apellidoM, String usuario, String contrasena,String creadoEl) {
         this.idUsuario = idUsuario;
         this.nombre = nombre;
         this.apellidoP = apellidoP;
@@ -19,9 +22,7 @@ public class User {
         this.creadoEl = creadoEl;
     }
 
-    private String usuario;
-    private String contrasena;
-    private String creadoEl;
+
 
     public int getIdUsuario() {
         return idUsuario;

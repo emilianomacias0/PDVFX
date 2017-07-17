@@ -1,6 +1,7 @@
 package Principal;
 
 import Datos.Datos;
+import Pacientes.Pacientes;
 import Registrar.Registrar;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -31,6 +32,26 @@ public class Controller implements Initializable {
     @FXML
     private BorderPane mainPane;
 
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // alto = mainPane.getCenter().getLayoutY();
+        // ancho = mainPane.getCenter().getLayoutX();
+        mainPane.heightProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                // alto.bind((ObservableValue<? extends Double>) newValue);
+                alto=(double)newValue;
+                System.out.println(alto);
+            }
+        });
+        mainPane.widthProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                //ancho.bind((ObservableValue<? extends Double>) newValue);
+                ancho = (double)newValue;
+            }
+        });
+    }
 
 
       public void cerrarPrograma(ActionEvent actionEvent) {
@@ -59,6 +80,7 @@ public class Controller implements Initializable {
        // System.out.println("Ancho: "+ancho);
         //System.out.println("Alto: "+alto);
       //  ((Stage)stgVentana.getScene().getWindow());
+        mainPane.setCenter(null);
     if (nueva.isVisible()){
         mainPane.setCenter(nueva);
     }else {
@@ -68,24 +90,13 @@ public class Controller implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // alto = mainPane.getCenter().getLayoutY();
-         // ancho = mainPane.getCenter().getLayoutX();
-        mainPane.heightProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                // alto.bind((ObservableValue<? extends Double>) newValue);
-                alto=(double)newValue;
-                System.out.println(alto);
-            }
-        });
-        mainPane.widthProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                //ancho.bind((ObservableValue<? extends Double>) newValue);
-                ancho = (double)newValue;
-            }
-        });
+
+
+    public void setPacientes(ActionEvent actionEvent) {
+        Pacientes pacientes= new Pacientes();
+        // ((Node)(event.getSource())).getScene().getWindow();
+        Pane pacientesScene = pacientes.Display();
+        mainPane.setCenter(null);
+        mainPane.setCenter(pacientesScene);
     }
 }

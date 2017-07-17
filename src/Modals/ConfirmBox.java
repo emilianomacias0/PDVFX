@@ -4,6 +4,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -20,13 +21,14 @@ public class ConfirmBox {
 
         window.setTitle(title);
 
-        window.setMinWidth(250);
+        window.setMinWidth(400);
+        window.setMinHeight(200);
 
         Label label = new Label();
         label.setText(message);
 
         //Button
-        Button buttonYes = new Button("Yes");
+        Button buttonYes = new Button("Si");
         Button buttonNo = new Button("No");
 
         buttonYes.setOnAction(e -> {
@@ -41,8 +43,11 @@ public class ConfirmBox {
         });
 
         VBox layout = new VBox();
-
-        layout.getChildren().addAll(label,buttonYes,buttonNo);
+        HBox layout2 = new HBox();
+        layout2.setAlignment(Pos.CENTER);
+        layout2.setSpacing(25);
+        layout2.getChildren().addAll(buttonYes,buttonNo);
+        layout.getChildren().addAll(label,layout2);
 
         layout.setAlignment(Pos.CENTER);
 

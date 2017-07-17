@@ -12,3 +12,10 @@
     -fx-min-width: 60;
     -fx-min-height: 30;
 }
+
+#hdRegistro{
+    -fx-background-color: white ;
+    -fx-text-fill: #0074D9;
+    -fx-font-weight: bold;
+
+}
