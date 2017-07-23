@@ -1,6 +1,7 @@
 package Principal;
 
 import Datos.Datos;
+import Home.Home;
 import Pacientes.Pacientes;
 import Registrar.Registrar;
 import javafx.beans.value.ChangeListener;
@@ -21,6 +22,7 @@ import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
     MainWindow main = new MainWindow();
+    Home home = new Home();
     public double alto ;
     public double ancho ;
 
@@ -36,6 +38,7 @@ public class Controller implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         // alto = mainPane.getCenter().getLayoutY();
         // ancho = mainPane.getCenter().getLayoutX();
+        mainPane.setCenter(home.Display());
         mainPane.heightProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -98,5 +101,9 @@ public class Controller implements Initializable {
         Pane pacientesScene = pacientes.Display();
         mainPane.setCenter(null);
         mainPane.setCenter(pacientesScene);
+    }
+
+    public void setHome(ActionEvent actionEvent) {
+        mainPane.setCenter(home.Display());
     }
 }

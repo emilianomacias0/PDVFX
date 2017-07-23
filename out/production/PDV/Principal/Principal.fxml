@@ -40,7 +40,7 @@
          <left>
             <VBox id="pnlSide" stylesheets="@Estilo.css" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" prefHeight="70.0" prefWidth="70.0">
+                  <Button fx:id="btnHome" mnemonicParsing="false" onAction="#setHome" prefHeight="70.0" prefWidth="70.0">
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -63,7 +63,7 @@
                   </Button>
                   <Button fx:id="btnPacientes" layoutX="10.0" layoutY="90.0" mnemonicParsing="false" onAction="#setPacientes" prefHeight="70.0" prefWidth="70.0">
                      <tooltip>
-                        <Tooltip text="Usuarios" />
+                        <Tooltip text="Pacientes" />
                      </tooltip>
                      <graphic>
                         <ImageView fitHeight="40.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">

@@ -16,21 +16,23 @@ public class ConfirmBox {
     static  Boolean answer;
     public static Boolean display(String title, String message) {
         Stage window = new Stage();
+
         //No permite operar otras ventanas hasta que esta se cierre
         window.initModality(Modality.APPLICATION_MODAL);
 
         window.setTitle(title);
 
         window.setMinWidth(400);
-        window.setMinHeight(200);
+        window.setMinHeight(150);
 
         Label label = new Label();
         label.setText(message);
 
         //Button
         Button buttonYes = new Button("Si");
+        buttonYes.setPrefSize(60,30);
         Button buttonNo = new Button("No");
-
+        buttonNo.setPrefSize(60,30);
         buttonYes.setOnAction(e -> {
             answer = true;
             window.close();
