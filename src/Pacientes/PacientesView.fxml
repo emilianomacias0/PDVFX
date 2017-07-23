@@ -40,7 +40,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXTextField focusColor="#009688" labelFloat="true" promptText="Nombre" />
+                  <JFXTextField fx:id="txtNombre" focusColor="#009688" labelFloat="true" onKeyTyped="#capitalizar" promptText="Nombre" />
                   <JFXTextField focusColor="#009688" labelFloat="true" promptText="Apellido Paterno" GridPane.columnIndex="1" />
                   <JFXTextField focusColor="#009688" labelFloat="true" promptText="Apellido Materno" GridPane.columnIndex="2" />
                   <JFXDatePicker promptText="Fecha de Nacimiento" GridPane.columnIndex="3" />
@@ -49,10 +49,10 @@
                   <JFXTextField focusColor="#009688" labelFloat="true" promptText="Colonia" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <JFXTextField focusColor="#009688" promptText="Municipio" GridPane.columnSpan="2" GridPane.rowIndex="2" />
                   <JFXTextField focusColor="#009688" labelFloat="true" promptText="C.P" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <JFXButton GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <JFXButton GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <JFXButton GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-                  <JFXButton GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <JFXButton text="Cancelar" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <JFXButton text="Limpiar" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <JFXButton text="Nuevo" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
+                  <JFXButton text="Guardar" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
                </children>
                <BorderPane.margin>
                   <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
