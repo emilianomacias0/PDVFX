@@ -23,8 +23,22 @@ public class Consultas extends Conexion {
         return false;
     }
 
-   /* public static void main(String[] args) throws SQLException {
+    public String CreaTabla(String consulta){
+        String res = "";
+
+        try {
+            Statement st = con.createStatement();
+            st.execute(consulta);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            res = e.getMessage();
+        }
+        return res;
+    }
+
+    public static void main(String[] args) throws SQLException {
         Consultas con = new Consultas();
-        System.out.println(con.Autenticacion("emiliano", "1234"));
-    }*/
+        con.CreaTabla("Create Table ");
+        //System.out.println(con.Autenticacion("emiliano", "1234"));
+    }
 }
